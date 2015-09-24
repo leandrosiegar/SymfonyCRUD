@@ -1,0 +1,16 @@
+{% extends 'edcBundle::viewEDC.html.twig' %}
+{% block body %}
+	{{ parent() }}
+	<h1>Agregar Película</h1>
+     {{ form_start(form) }}
+         <p>Título: {{form_widget(form.titulo)}}</p>
+         <p>Año: {{form_widget(form.anno)}}</p>
+         <p>Director: {{form_widget(form.idDirector)}}</p>
+         <p>Actor 1: {{form_widget(form.idActor1)}}</p>
+         <p>Actor 2: {{form_widget(form.idActor2)}}</p>
+         <p>
+            <hr />
+            {{form_widget(form.guardar)}}
+        </p>
+      {{ form_end(form) }}
+ {% endblock %}

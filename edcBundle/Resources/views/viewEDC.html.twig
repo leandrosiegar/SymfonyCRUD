@@ -1,0 +1,18 @@
+{# esta va a ser la vista standard que heredaran las otras vistas #}
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bundles/peliculas/css/css_edc.css') }}" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <ol class="breadcrumb">
+  
+        <li><a href="{{ path('addCineasta') }}">Añadir cineasta</a></li>
+        <li><a href="{{ path('listarCineastas') }}">Listar cineastas</a></li>
+        <li><a href="{{ path('addPelicula') }}">Añadir película</a></li>
+        <li><a href="{{ path('listarPeliculas') }}">Listar películas</a></li>
+     
+    </ol>
+{% endblock %} 

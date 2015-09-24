@@ -1,0 +1,12 @@
+{% extends 'edcBundle::viewEDC.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    <h1>Editar Cineasta</h1>
+    {{ form_start(form) }}
+         <p>Nombre: {{form_widget(form.nombre)}}</p>
+         <p>
+            <hr />
+            {{form_widget(form.guardar)}}
+        </p>
+    {{ form_end(form) }}
+{% endblock %}

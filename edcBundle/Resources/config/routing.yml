@@ -1,0 +1,27 @@
+xxxxedc_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: edcBundle:Default:index }
+addCineasta:
+    path:     /peliculas/addCineasta
+    defaults: { _controller: edcBundle:Default:addCineasta }
+addPelicula:
+    path:     /peliculas/addPelicula
+    defaults: { _controller: edcBundle:Default:addPelicula }
+delCineasta:
+    path:     /peliculas/delCineasta/{id}
+    defaults: { _controller: edcBundle:Default:delCineasta }
+delPelicula:
+    path:     /peliculas/delPelicula/{id}
+    defaults: { _controller: edcBundle:Default:delPelicula }
+editCineasta:
+    path:     /peliculas/editCineasta/{id}
+    defaults: { _controller: edcBundle:Default:editCineasta }
+editPelicula:
+    path:     /peliculas/editPelicula/{id}
+    defaults: { _controller: edcBundle:Default:editPelicula }
+listarCineastas:
+    path:     /peliculas/listarCineastas
+    defaults: { _controller: edcBundle:Default:listarCineastas }
+listarPeliculas:
+    path:     /peliculas/listarPeliculas
+    defaults: { _controller: edcBundle:Default:listarPeliculas }

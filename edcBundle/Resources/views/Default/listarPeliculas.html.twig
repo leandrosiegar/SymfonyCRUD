@@ -1,0 +1,51 @@
+{% extends 'edcBundle::viewEDC.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	{{ dump(arrDatos) }}
+	<hr>
+	{{ dump(arrCineastas) }}
+	<hr>
+	<h1>Listado de películas</h1>
+	 {% for flashMessage in app.session.flashbag.get('mensaje') %}
+	    <span class="alert-success">
+	        {{ flashMessage }}
+	        <hr />
+	    </span>
+    {% endfor %}
+
+    <hr />
+    <table class="table table-bordered">
+        <tbody>
+            <th>Título</th>
+            <th>Año</th>
+            <th>Director</th>
+             <th>Actor 1</th>
+              <th>Actor 2</th>
+              <th></th>
+        </tbody>
+       	{% for dato in arrDatos %}
+        <tr>
+            <td>{{dato.titulo}}</td>
+            <td>{{dato.anno}}</td>
+            <td>{{ arrCineastas[dato.id].nomDirector }}</td>
+            <td>{{ arrCineastas[dato.id].nomActor1 }}</td>
+            <td>{{ arrCineastas[dato.id].nomActor2 }}</td>
+            <td>
+            	<a href="{{ path('editPelicula', {'id':dato.id}) }}" title="Editar">Editar</a>
+                -
+                <a onclick="return eliminarPel({{ dato.id }},'{{ dato.titulo }}');" href="{{ path('delPelicula', {'id':dato.id}) }}" title="Eliminar">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <script>
+	function eliminarPel(idPelicula, titulo) {
+		if (confirm("¿Estás seguro de querer eliminar la película "+titulo+"?"))
+			return true;
+		else
+			return false;
+	}
+	</script>
+{% endblock %}
