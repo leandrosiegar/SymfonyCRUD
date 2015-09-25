@@ -8,11 +8,12 @@
 
 {% block body %}
     <ol class="breadcrumb">
-  
+  		<li>Hola {{app.session.get('nombre')}}</li>
+  		<li><a href="{{ path('addCineasta') }}">Añadir cineasta</a></li>
         <li><a href="{{ path('addCineasta') }}">Añadir cineasta</a></li>
         <li><a href="{{ path('listarCineastas') }}">Listar cineastas</a></li>
         <li><a href="{{ path('addPelicula') }}">Añadir película</a></li>
         <li><a href="{{ path('listarPeliculas') }}">Listar películas</a></li>
-     
-    </ol>
+        <li><a href="{{ path('logout') }}">Desloguearse</a></li>
+     </ol>
 {% endblock %} 

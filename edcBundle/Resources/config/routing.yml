@@ -1,5 +1,5 @@
-xxxxedc_homepage:
-    path:     /hello/{name}
+raiz:
+    path:     /
     defaults: { _controller: edcBundle:Default:index }
 addCineasta:
     path:     /peliculas/addCineasta
@@ -25,3 +25,9 @@ listarCineastas:
 listarPeliculas:
     path:     /peliculas/listarPeliculas
     defaults: { _controller: edcBundle:Default:listarPeliculas }
+login:
+    path:     /peliculas/login
+    defaults: { _controller: edcBundle:Login:login }
+logout:
+    path:     /peliculas/logout
+    defaults: { _controller: edcBundle:Login:logout }

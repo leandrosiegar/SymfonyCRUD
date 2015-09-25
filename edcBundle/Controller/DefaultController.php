@@ -12,15 +12,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-    	// return $this->render('edcBundle:Default:index.html.twig', array('name' => $name));
+    	return $this->render('edcBundle:Default:index.html.twig');
     }
     
  
     // **************************************************
     public function addCineastaAction(Request $request)
     {
+    	// check si está logado
+    	$session = $request->getSession();
+    	if(!$session->has("id")) {
+    		$this->get('session')->getFlashBag()->add(
+    				'mensaje',
+    				'Debe estar logueado para ver este contenido'
+    		);
+    		return $this->redirect($this->generateUrl('login'));
+    	}
+    	
     	$cineastaAux = new cineastas();
     	$form = $this->createForm(new cineastasType(),$cineastaAux);
     	$form->handleRequest($request);
@@ -44,6 +54,16 @@ class DefaultController extends Controller
     // **************************************************
     public function addPeliculaAction(Request $request)
     {
+    	// check si está logado
+    	$session = $request->getSession();
+    	if(!$session->has("id")) {
+    		$this->get('session')->getFlashBag()->add(
+    				'mensaje',
+    				'Debe estar logueado para ver este contenido'
+    		);
+    		return $this->redirect($this->generateUrl('login'));
+    	}
+    	
      	$peliculaAux = new peliculas();
     	$form = $this->createForm(new peliculasType(),$peliculaAux);
     	$form->handleRequest($request);
@@ -61,9 +81,21 @@ class DefaultController extends Controller
     			array("form"=>$form->createView()));
     }
     
+		
+			
     // *****************************************
     public function delCineastaAction($id)
     {
+    	// check si está logado
+    	$session = $request->getSession();
+    	if(!$session->has("id")) {
+    		$this->get('session')->getFlashBag()->add(
+    				'mensaje',
+    				'Debe estar logueado para ver este contenido'
+    		);
+    		return $this->redirect($this->generateUrl('login'));
+    	}
+    	
     	$em = $this->getDoctrine()->getManager();
     	$cineastaAux = $em->getRepository('edcBundle:cineastas')->find($id);
     
@@ -85,6 +117,16 @@ class DefaultController extends Controller
     // *****************************************
     public function delPeliculaAction($id)
     {
+    	// check si está logado
+    	$session = $request->getSession();
+    	if(!$session->has("id")) {
+    		$this->get('session')->getFlashBag()->add(
+    				'mensaje',
+    				'Debe estar logueado para ver este contenido'
+    		);
+    		return $this->redirect($this->generateUrl('login'));
+    	}
+    	
     	$em = $this->getDoctrine()->getManager();
     	$peliculaAux = $em->getRepository('edcBundle:peliculas')->find($id);
     
@@ -106,9 +148,18 @@ class DefaultController extends Controller
     // *******************************************
     public function editCineastaAction($id,Request $request)
     {
+    	// check si está logado
+    	$session = $request->getSession();
+    	if(!$session->has("id")) {
+    		$this->get('session')->getFlashBag()->add(
+    				'mensaje',
+    				'Debe estar logueado para ver este contenido'
+    		);
+    		return $this->redirect($this->generateUrl('login'));
+    	}
+    	
     	$cineastaAux = new cineastas();
-    	 
-    	$datos = $this->getDoctrine()
+     	$datos = $this->getDoctrine()
     	->getRepository('edcBundle:cineastas')
     	->find($id);
     	if (!$datos) {
@@ -136,8 +187,17 @@ class DefaultController extends Controller
     // *******************************************
     public function editPeliculaAction($id,Request $request)
     {
+    	// check si está logado
+    	$session = $request->getSession();
+    	if(!$session->has("id")) {
+    		$this->get('session')->getFlashBag()->add(
+    				'mensaje',
+    				'Debe estar logueado para ver este contenido'
+    		);
+    		return $this->redirect($this->generateUrl('login'));
+    	}
+    	
     	$peliculaAux = new peliculas();
-    
     	$datos = $this->getDoctrine()
 	    	->getRepository('edcBundle:peliculas')
 	    	->find($id);
@@ -177,8 +237,18 @@ class DefaultController extends Controller
     }
     
     // **************************************
-    public function listarCineastasAction()
+    public function listarCineastasAction(Request $request)
     {
+    	// check si está logado
+    	$session = $request->getSession();
+    	if(!$session->has("id")) {
+    		$this->get('session')->getFlashBag()->add(
+    				'mensaje',
+    				'Debe estar logueado para ver este contenido'
+    		);
+    		return $this->redirect($this->generateUrl('login'));
+    	}
+ 
     	$datos = $this->getDoctrine()
     	/*
     	 ->getRepository('edcBundle:cineastas')
@@ -201,6 +271,16 @@ class DefaultController extends Controller
     // **************************************
     public function listarPeliculasAction()
     {
+    	// check si está logado
+    	$session = $request->getSession();
+    	if(!$session->has("id")) {
+    		$this->get('session')->getFlashBag()->add(
+    				'mensaje',
+    				'Debe estar logueado para ver este contenido'
+    		);
+    		return $this->redirect($this->generateUrl('login'));
+    	}
+    	
     	$datos = $this->getDoctrine()
     	 	->getRepository('edcBundle:peliculas')
     		/*->findAll();*/
@@ -222,7 +302,6 @@ class DefaultController extends Controller
     		$arrAux = array("nomDirector"=>$nomDirector, "nomActor1"=>$nomActor1,"nomActor2"=>$nomActor2);
     		$arrCineastas[$valor->getId()] = $arrAux;
     	}
-  
     
     	return $this->render('edcBundle:Default:listarPeliculas.html.twig',
     			array("arrDatos"=>$datos, "arrCineastas"=>$arrCineastas));
